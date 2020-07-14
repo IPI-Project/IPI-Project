@@ -68,11 +68,11 @@ public class GameService {
 
     public List<Game> getPlayerGames(Player player) {
         return gameRepository.findByGameStatus(
-                GameStatus.IN_PROGRESS).stream().filter(game -> game.getFirstPlayer() == player).collect(Collectors.toList());
+                GameStatus.IN_PROGRESS).stream().filter(game -> (game.getFirstPlayer() == player) || (game.getSecondPlayer() == player)).collect(Collectors.toList());
     }
 
 
     public Game getGame(Long id) {
-        return gameRepository.findOne(id);
+        return gameRepository.findGameById(id);
     }
 }

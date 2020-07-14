@@ -195,7 +195,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 var boardColumn = parseInt(column.id.charAt(1));
                 var params = {'boardRow': boardRow, 'boardColumn': boardColumn}
 
-                if (checkIfBoardCellAvailable(boardRow, boardColumn) == true) {
+                if (checkIfBoardCellAvailable(boardRow, boardColumn)) {
                     // if player has a turn
                     if (scope.playerTurn == true) {
 

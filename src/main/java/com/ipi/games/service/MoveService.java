@@ -27,6 +27,8 @@ public class MoveService {
 
     private final MoveRepository moveRepository;
 
+    @Autowired
+    private PlayerService playerService;
 
     @Autowired
     public MoveService(MoveRepository moveRepository) {
@@ -115,8 +117,12 @@ public class MoveService {
     }
 
     public boolean isPlayerTurn(Game game, Player firstPlayer, Player secondPlayer) {
-        return GameLogic.playerTurn(getTheNumberOfPlayerMovesInGame(game, firstPlayer),
-                getTheNumberOfPlayerMovesInGame(game, secondPlayer));
+        Player currentPlayer = playerService.getLoggedUser();
+        int countFirstPlayerMoves = getTheNumberOfPlayerMovesInGame(game, firstPlayer);
+        int countSecondPlayerMoves = getTheNumberOfPlayerMovesInGame(game, secondPlayer);
+        return currentPlayer == firstPlayer ? countFirstPlayerMoves == countSecondPlayerMoves : countSecondPlayerMoves<countFirstPlayerMoves;
+        /*return GameLogic.playerTurn(getTheNumberOfPlayerMovesInGame(game, firstPlayer),
+                getTheNumberOfPlayerMovesInGame(game, secondPlayer),currentPlayer);*/
     }
 
 

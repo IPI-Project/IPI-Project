@@ -29,7 +29,7 @@ public class GameApplication {
 	}*/
 
 
-    @Bean
+    /*@Bean
     public CommandLineRunner demo(PlayerRepository playerRepository) {
         return (args) -> {
 
@@ -38,6 +38,6 @@ public class GameApplication {
             playerRepository.save(new Player("mary", "mary@mary.com",  new BCryptPasswordEncoder().encode("mary")));
 
         };
-    }
+    }*/
 
 }

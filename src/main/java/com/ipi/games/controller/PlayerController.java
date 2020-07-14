@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/player")
@@ -27,8 +29,8 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/players", method = RequestMethod.GET)
-    public void getPlayers() {
-        playerService.listPlayers();}
+    public List<Player> getPlayers() {
+        return playerService.listPlayers();}
 
     @RequestMapping(value = "/logged", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response<Player> getLoggedPlayer() {
