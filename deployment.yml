@@ -1,31 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springpdf-deployment
+  name: game-app-deployment
   labels:
-    app: springpdf
+    app: game-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: springpdf
+      app: game-app
   template:
     metadata:
       labels:
-        app: springpdf
+        app: game-app
     spec:
       terminationGracePeriodSeconds: 30
       containers:
-        - name: springpdf
+        - name: game-app
           image: jorgelfant/ipi-project
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 3003
           env:
-            - name: MYSQL_ROOT_HOST
-              value: '%'
             - name: MYSQL_HOST
-              value: mariadb
+              value: mysql
             - name: MYSQL_USER
               value: root
             - name: MYSQL_PASSWORD
@@ -38,29 +36,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springpdf
+  name: game-app
   labels:
-    run: springpdf
+    run: game-app
 spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 3003
+      targetPort: 3003
       name: http
   selector:
-    app: springpdf
+    app: game-app
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb
+  name: mysql
 spec:
   ports:
     - port: 3306
   selector:
-    app: mariadb
+    app: mysql
   clusterIP: None
 
 ---
@@ -68,28 +66,26 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb-deployment
+  name: mysql-deployment
   labels:
-    app: mariadb
+    app: mysql
 spec:
   selector:
     matchLabels:
-      app: mariadb
+      app: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mariadb
+        app: mysql
     spec:
       containers:
-        - image: mariadb
-          name: mariadb
+        - image: mysql
+          name: mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: test1234
-            - name: MYSQL_ROOT_USER
-              value: root
             - name: MYSQL_USER
               value: root
             - name: MYSQL_PASSWORD
@@ -98,21 +94,21 @@ spec:
               value: games
           ports:
             - containerPort: 3306
-              name: mariadb
+              name: mysql
           volumeMounts:
-            - name: mariadb-persistent-storage
+            - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
       volumes:
-        - name: mariadb-persistent-storage
+        - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: mariadb-pv-claim
+            claimName: mysql-pv-claim
 
 ---
 
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mariadb-pv-volume
+  name: mysql-pv-volume
   labels:
     type: local
 spec:
@@ -127,7 +123,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb-pv-claim
+  name: mysql-pv-claim
 spec:
   storageClassName: manual
   accessModes:
