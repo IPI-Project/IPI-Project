@@ -68,7 +68,7 @@ kind: Deployment
 metadata:
   name: mariadb-deployment
   labels:
-    app: springpdf
+    app: mariadb
 spec:
   selector:
     matchLabels:
