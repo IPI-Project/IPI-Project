@@ -23,7 +23,7 @@ spec:
             - containerPort: 3003
           env:
             - name: MYSQL_HOST
-              value: mysql
+              value: mariadb
             - name: MYSQL_USER
               value: root
             - name: MYSQL_PASSWORD
@@ -53,12 +53,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: docker-mysql
+  name: mariadb
 spec:
   ports:
     - port: 3306
   selector:
-    app: docker-mysql
+    app: mariadb
   clusterIP: None
 
 ---
@@ -66,23 +66,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docker-mysql-deployment
+  name: mariadb-deployment
   labels:
-    app: docker-mysql
+    app: mariadb
 spec:
   selector:
     matchLabels:
-      app: docker-mysql
+      app: mariadb
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: docker-mysql
+        app: mariadb
     spec:
       containers:
-        - image: mysql
-          name: docker-mysql
+        - image: mariadb
+          name: mariadb
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: test1234
@@ -94,21 +94,21 @@ spec:
               value: games
           ports:
             - containerPort: 3306
-              name: docker-mysql
+              name: mariadb
           volumeMounts:
-            - name: docker-mysql-persistent-storage
+            - name: mariadb-persistent-storage
               mountPath: /var/lib/mysql
       volumes:
-        - name: docker-mysql-persistent-storage
+        - name: mariadb-persistent-storage
           persistentVolumeClaim:
-            claimName: docker-mysql-pv-claim
+            claimName: mariadb-pv-claim
 
 ---
 
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: docker-mysql-pv-volume
+  name: mariadb-pv-volume
   labels:
     type: local
 spec:
@@ -123,7 +123,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: docker-mysql-pv-claim
+  name: mariadb-pv-claim
 spec:
   storageClassName: manual
   accessModes:
