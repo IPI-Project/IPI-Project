@@ -9,10 +9,6 @@ import lombok.Setter;
 
 import java.util.Date;
 
-/**
- * Created by patrycja on 08.07.16.
- */
-
 @Getter
 @Setter
 @AllArgsConstructor
