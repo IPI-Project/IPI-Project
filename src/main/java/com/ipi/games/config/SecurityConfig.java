@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,15 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests().antMatchers(
-                "/player/registration**").permitAll()
-                    .anyRequest().authenticated()
+                "/registration**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                     .usernameParameter("username")
-                     .passwordParameter("password")
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-                    .httpBasic()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
                 .and()
-                    .csrf().disable();
+                .csrf().disable();
+
     }
 }
