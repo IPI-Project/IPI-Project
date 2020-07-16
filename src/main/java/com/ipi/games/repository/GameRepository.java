@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface GameRepository extends CrudRepository<Game, Long>{
     List<Game> findByGameTypeAndGameStatus(GameType GameType, GameStatus GameStatus);
     List<Game> findByGameStatus(GameStatus gameStatus);
-    //@Query(value = "SELECT * from Game g WHERE g.id = id")
     Game findGameById(Long id);
+    List<Game> findAllByFirstPlayerIdOrSecondPlayerId(int id, int id1);
 }
