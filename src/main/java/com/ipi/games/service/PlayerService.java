@@ -3,6 +3,7 @@ package com.ipi.games.service;
 import com.ipi.games.DTO.PlayerDTO;
 import com.ipi.games.domain.Game;
 import com.ipi.games.domain.Player;
+import com.ipi.games.enums.GameStatus;
 import com.ipi.games.repository.GameRepository;
 import com.ipi.games.repository.PlayerRepository;
 import com.ipi.games.security.ContextUser;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -21,6 +23,9 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    private GameRepository gameRepository;
 
     @Autowired
     public PlayerService(PlayerRepository playerRepository) {
@@ -46,6 +51,11 @@ public class PlayerService {
         return players;
     }
 
+    public List<Game> gamesHistory(Player player) {
+        List<Game> gamesList = (List<Game>) gameRepository.findAllByFirstPlayerIdOrSecondPlayerId(player.getId(),player.getId()).
+                stream().filter(game -> game.getGameStatus() != GameStatus.IN_PROGRESS).collect(Collectors.toList());
+        return gamesList;
+    }
 
 }
 

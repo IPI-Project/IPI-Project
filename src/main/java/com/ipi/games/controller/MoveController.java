@@ -8,8 +8,7 @@ import com.ipi.games.service.GameService;
 import com.ipi.games.service.MoveService;
 import com.ipi.games.service.PlayerService;
 import com.ipi.games.domain.Position;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/move")
 public class MoveController {
@@ -36,12 +36,10 @@ public class MoveController {
     @Autowired
     private HttpSession httpSession;
 
-    Logger logger = LoggerFactory.getLogger(MoveController.class);
-
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Move createMove(@RequestBody CreateMoveDTO createMoveDTO) {
         Long gameId = (Long) httpSession.getAttribute("gameId");
-        logger.info("move to insert:" + createMoveDTO.getBoardColumn() + createMoveDTO.getBoardRow());
+        log.info("move to insert:" + createMoveDTO.getBoardColumn() + createMoveDTO.getBoardRow());
 
 
         Move move = moveService.createMove(gameService.getGame(gameId), playerService.getLoggedUser(), createMoveDTO);
@@ -55,7 +53,7 @@ public class MoveController {
     public Move autoCreateMove() {
         Long gameId = (Long) httpSession.getAttribute("gameId");
 
-        logger.info("AUTO move to insert:" );
+        log.info("AUTO move to insert:" );
 
         Move move = moveService.autoCreateMove(gameService.getGame(gameId));
 

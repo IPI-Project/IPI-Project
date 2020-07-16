@@ -1,7 +1,9 @@
 package com.ipi.games.service;
 
 import com.ipi.games.domain.Game;
+import com.ipi.games.domain.Player;
 import com.ipi.games.domain.Position;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +70,11 @@ public class GameLogic {
      * @param numberOfSecondPlayerMovesInGame
      * @return true or false depending on the count of the player's moves
      */
-    static boolean playerTurn(int numberOfFirstPlayerMovesInGame, int numberOfSecondPlayerMovesInGame) {
-        return numberOfFirstPlayerMovesInGame == numberOfSecondPlayerMovesInGame || numberOfFirstPlayerMovesInGame == 0;
+    //TODO khalid clean code methode non utilisée
+    static boolean playerTurn(int numberOfFirstPlayerMovesInGame, int numberOfSecondPlayerMovesInGame, Player currentPlayer) {
+
+       return numberOfFirstPlayerMovesInGame == numberOfSecondPlayerMovesInGame || numberOfFirstPlayerMovesInGame == 0;
+
     }
 
     static boolean isBoardIsFull(List<Position> takenPositions) {
