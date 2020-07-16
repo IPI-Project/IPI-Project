@@ -17,11 +17,13 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: springpdf
-          image: jorgelfant/ipi-project:latest
+          image: jorgelfant/ipi-project
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
+            - name: MYSQL_ROOT_HOST
+              value: '%'
             - name: MYSQL_HOST
               value: mariadb
             - name: MYSQL_USER
@@ -81,11 +83,13 @@ spec:
         app: mariadb
     spec:
       containers:
-        - image: mariadb:latest
+        - image: mariadb
           name: mariadb
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: test1234
+            - name: MYSQL_ROOT_USER
+              value: root
             - name: MYSQL_USER
               value: root
             - name: MYSQL_PASSWORD
