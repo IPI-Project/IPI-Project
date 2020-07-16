@@ -5,16 +5,16 @@ import com.ipi.games.domain.Game;
 import com.ipi.games.enums.GameStatus;
 import com.ipi.games.service.GameService;
 import com.ipi.games.service.PlayerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/game")
 public class GameController {
@@ -28,7 +28,7 @@ public class GameController {
     @Autowired
     HttpSession httpSession;
 
-    Logger logger = LoggerFactory.getLogger(GameController.class);
+
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Game createNewGame(@RequestBody GameDTO gameDTO) {
@@ -36,7 +36,7 @@ public class GameController {
         Game game = gameService.createNewGame(playerService.getLoggedUser(), gameDTO);
         httpSession.setAttribute("gameId", game.getId());
 
-        logger.info("new game id: " + httpSession.getAttribute("gameId")+ " stored in session" );
+        log.info("new game id: " + httpSession.getAttribute("gameId")+ " stored in session" );
 
         return game;
     }

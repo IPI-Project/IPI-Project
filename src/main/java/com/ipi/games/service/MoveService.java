@@ -117,12 +117,15 @@ public class MoveService {
     }
 
     public boolean isPlayerTurn(Game game, Player firstPlayer, Player secondPlayer) {
+
         Player currentPlayer = playerService.getLoggedUser();
+
         int countFirstPlayerMoves = getTheNumberOfPlayerMovesInGame(game, firstPlayer);
         int countSecondPlayerMoves = getTheNumberOfPlayerMovesInGame(game, secondPlayer);
-        return currentPlayer == firstPlayer ? countFirstPlayerMoves == countSecondPlayerMoves : countSecondPlayerMoves<countFirstPlayerMoves;
-        /*return GameLogic.playerTurn(getTheNumberOfPlayerMovesInGame(game, firstPlayer),
-                getTheNumberOfPlayerMovesInGame(game, secondPlayer),currentPlayer);*/
+
+        return currentPlayer == firstPlayer ? countFirstPlayerMoves == countSecondPlayerMoves :
+                countSecondPlayerMoves<countFirstPlayerMoves;
+
     }
 
 
