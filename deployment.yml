@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: game-app-deployment
+  name: springpdf-deployment
   labels:
-    app: game-app
+    app: springpdf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: game-app
+      app: springpdf
   template:
     metadata:
       labels:
-        app: game-app
+        app: springpdf
     spec:
       terminationGracePeriodSeconds: 30
       containers:
-        - name: game-app
-          image: jorgelfant/ipi-project
+        - name: springpdf
+          image: jorgelfant/ipi-project:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 3003
+            - containerPort: 8080
           env:
             - name: MYSQL_HOST
               value: mariadb
@@ -36,18 +36,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: game-app
+  name: springpdf
   labels:
-    run: game-app
+    run: springpdf
 spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 3003
-      targetPort: 3003
+      port: 80
+      targetPort: 8080
       name: http
   selector:
-    app: game-app
+    app: springpdf
 ---
 
 apiVersion: v1
@@ -68,7 +68,7 @@ kind: Deployment
 metadata:
   name: mariadb-deployment
   labels:
-    app: mariadb
+    app: springpdf
 spec:
   selector:
     matchLabels:
@@ -81,7 +81,7 @@ spec:
         app: mariadb
     spec:
       containers:
-        - image: mariadb
+        - image: mariadb:latest
           name: mariadb
           env:
             - name: MYSQL_ROOT_PASSWORD
