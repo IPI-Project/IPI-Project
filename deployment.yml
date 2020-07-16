@@ -25,7 +25,7 @@ spec:
             - name: MYSQL_HOST
               value: mysql
             - name: MYSQL_USER
-              value: root
+              value: admin
             - name: MYSQL_PASSWORD
               value: test1234
             - name: MYSQL_DATABASE
@@ -57,6 +57,7 @@ metadata:
 spec:
   ports:
     - port: 3306
+      targetPort: 3306
   selector:
     app: mysql
   clusterIP: None
@@ -84,8 +85,12 @@ spec:
         - image: mysql
           name: mysql
           env:
+            - name: MYSQL_DATABASE
+              value: games
             - name: MYSQL_ROOT_PASSWORD
               value: test1234
+            - name: MYSQL_ROOT_HOST
+              value: '%'
           ports:
             - containerPort: 3306
               name: mysql
