@@ -70,7 +70,7 @@ spec:
     matchLabels:
       app: docker-mysql
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
