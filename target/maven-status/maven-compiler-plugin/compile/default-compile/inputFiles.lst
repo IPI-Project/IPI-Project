@@ -1,7 +1,6 @@
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\GameApplication.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\service\GameLogic.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\config\SecurityConfig.java
-C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\service\Response.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\DTO\PlayerDTO.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\controller\GameController.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\service\MoveService.java
@@ -22,5 +21,6 @@ C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\enums\Piece.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\security\ContextUser.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\domain\Player.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\DTO\GameDTO.java
+C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\controller\MainController.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\DTO\CreateMoveDTO.java
 C:\Users\JORGE\Desktop\IPI-Project\src\main\java\com\ipi\games\repository\PlayerRepository.java
