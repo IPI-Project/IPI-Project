@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<!-- create navigation bar ( header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Your History</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Created</th>
+                    <th scope="col">First Player</th>
+                    <th scope="col">Second Player</th>
+                    <th scope="col">Game Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game : ${games}"  >
+                    <td >
+                        <span th:text="${game.created}"> </span>
+                    </td>
+
+                    <td th:text="${game.firstPlayer != null} ? ${game.firstPlayer.userName } : 'computer'"/>
+
+                    <td th:text="${game.secondPlayer != null} ? ${game.secondPlayer.userName} : 'computer'"/>
+
+                    <td>
+                        <span th:text="${game.gameStatus}"> </span>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
