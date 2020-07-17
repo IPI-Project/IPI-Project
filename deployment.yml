@@ -28,6 +28,8 @@ spec:
               value: root
             - name: MYSQL_PASSWORD
               value: test1234
+            - name: MYSQL_ROOT_PASSWORD
+              value: test1234
             - name: MYSQL_DATABASE
               value: games
 
@@ -57,7 +59,6 @@ metadata:
 spec:
   ports:
     - port: 3306
-      targetPort: 3306
   selector:
     app: mysql
   clusterIP: None
@@ -85,12 +86,14 @@ spec:
         - image: mysql
           name: mysql
           env:
-            - name: MYSQL_DATABASE
-              value: games
             - name: MYSQL_ROOT_PASSWORD
               value: test1234
-            - name: MYSQL_ROOT_HOST
-              value: '%'
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: test1234
+            - name: MYSQL_DATABASE
+              value: games
           ports:
             - containerPort: 3306
               name: mysql
@@ -115,7 +118,7 @@ spec:
   capacity:
     storage: 10Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
     path: "/var/lib/mysql"
 ---
@@ -126,7 +129,10 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
+
+
+
