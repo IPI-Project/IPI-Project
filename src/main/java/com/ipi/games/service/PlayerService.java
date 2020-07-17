@@ -52,7 +52,7 @@ public class PlayerService {
     }
 
     public List<Game> gamesHistory(Player player) {
-        List<Game> gamesList = (List<Game>) gameRepository.findAllByFirstPlayerIdOrSecondPlayerId(player.getId(),player.getId()).
+        List<Game> gamesList = gameRepository.findAllByFirstPlayerIdOrSecondPlayerId(player.getId(),player.getId()).
                 stream().filter(game -> game.getGameStatus() != GameStatus.IN_PROGRESS).collect(Collectors.toList());
         return gamesList;
     }

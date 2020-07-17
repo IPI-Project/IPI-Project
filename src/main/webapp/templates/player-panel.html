@@ -92,10 +92,10 @@
                 <tr ng-repeat="game in playerGames">
                     <td>{{game.firstPlayer.userName}}</td>
                     <td>
-                        <span ng-if="!game.player.userName">
-                            COMPUTER
+                        <span ng-if="game.secondPlayer == null">
+                            computer
                         </span>
-                        <span ng-if="game.player.userName != ''">
+                        <span >
                             {{game.secondPlayer.userName}}
                         </span>
                     </td>

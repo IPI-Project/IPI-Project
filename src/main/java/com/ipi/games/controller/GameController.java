@@ -30,7 +30,7 @@ public class GameController {
 
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping("/create")
     public Game createNewGame(@RequestBody GameDTO gameDTO) {
 
         Game game = gameService.createNewGame(playerService.getLoggedUser(), gameDTO);
@@ -41,19 +41,19 @@ public class GameController {
         return game;
     }
 
-    @RequestMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/list")
     public List<Game> getGamesToJoin() {
         return gameService.getGamesToJoin(playerService.getLoggedUser());
     }
 
-    @RequestMapping(value = "/join", method = RequestMethod.POST)
+    @PostMapping("/join")
     public Game joinGame(@RequestBody GameDTO gameDTO) {
         Game game = gameService.joinGame(playerService.getLoggedUser(), gameDTO);
         return game;
     }
 
 
-    @RequestMapping(value = "/player/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/player/list")
     public List<Game> getPlayerGames() {
         return gameService.getPlayerGames(playerService.getLoggedUser());
     }

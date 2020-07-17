@@ -141,7 +141,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 getMoveHistory().success(function () {
                     var gameStatus = scope.movesInGame[scope.movesInGame.length - 1].gameStatus;
                     if (gameStatus != 'IN_PROGRESS') {
-                        alert(gameStatus)
+                        setTimeout(function() { alert(gameStatus); }, 500);
                     }
                 });
             }).error(function (data, status, headers, config) {
@@ -210,7 +210,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                                 if (gameStatus == 'IN_PROGRESS') {
                                     getNextMove();
                                 } else {
-                                    alert(gameStatus)
+                                    setTimeout(function() { alert(gameStatus); }, 500);
                                 }
                             });
 
