@@ -55,6 +55,7 @@ kind: Service
 metadata:
   name: mysql
 spec:
+  type: NodePort
   ports:
     - port: 3306
       targetPort: 3306
@@ -69,7 +70,7 @@ kind: Deployment
 metadata:
   name: mysql-deployment
   labels:
-    app: game-app
+    app: mysql
 spec:
   selector:
     matchLabels:
