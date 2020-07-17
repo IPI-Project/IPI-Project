@@ -69,7 +69,7 @@ kind: Deployment
 metadata:
   name: mysql-deployment
   labels:
-    app: mysql
+    app: game-app
 spec:
   selector:
     matchLabels:
