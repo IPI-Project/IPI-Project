@@ -58,7 +58,8 @@ metadata:
   name: mysql
 spec:
   ports:
-    - port: 3306
+    - targetPort: 3306
+      port: 3306
   selector:
     app: mysql
   clusterIP: None
@@ -133,6 +134,19 @@ spec:
   resources:
     requests:
       storage: 10Gi
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
