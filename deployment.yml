@@ -27,7 +27,7 @@ spec:
             - name: MYSQL_USER
               value: root
             - name: MYSQL_PASSWORD
-              value: "test1234"
+              value: ""
             - name: MYSQL_DATABASE
               value: games
 
@@ -88,7 +88,7 @@ spec:
             - name: MYSQL_DATABASE
               value: games
             - name: MYSQL_ROOT_PASSWORD
-              value: "test1234"
+              value: ""
             - name: MYSQL_ROOT_HOST
               value: '%'
           ports:
