@@ -26,8 +26,7 @@ spec:
               value: mysql
             - name: MYSQL_USER
               value: root
-            - name: MYSQL_PASSWORD
-              value: ""
+
             - name: MYSQL_DATABASE
               value: games
 
